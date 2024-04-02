@@ -1,0 +1,33 @@
+
+.center_text{
+	text-align: center;
+}
+.center_text h2{
+	font-size: var(--h2-font);
+	font-weight: 700;
+}
+.selling_content{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+	align-items: center;
+	gap: 2.5rem;
+	margin-top: 4rem;
+}
+/* ---------------media aquirey-------- */
+
+@media(max-width: 1610px){
+	section{
+		padding: 70px 7% 80px;
+	}	
+}
+
+@media(max-width: 1170px){
+	section{
+		padding: 60px 4% 70px;
+	}
+
+	.selling_content{
+		grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+	}
+}
+
