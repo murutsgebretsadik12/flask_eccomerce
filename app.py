@@ -1,10 +1,12 @@
-from flask import Flask, render_template,redirect, url_for, request, flash
+from flask import Flask, render_template,redirect, url_for, request, flash, send_file
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from model import  db,init_db,Product,User 
 from config import Config
 from flask_login import LoginManager, current_user,login_user, logout_user, login_required
+import os
+from io import BytesIO
 
 # Create a Flask app instance
 app = Flask(__name__)
@@ -39,7 +41,9 @@ def home():
 
 @app.route('/product')
 def product():
-    return render_template('product.html')
+    # Query all images from the database
+    products = Product.query.limit(3).all()
+    return render_template('product.html',products=products)
 
 @app.route('/popular')
 def popular():
@@ -96,6 +100,22 @@ def admin_add_product():
             flash('Invalid file format.', 'error')
 
     return render_template('admin/add_product.html')
+
+
+@app.route('/admin/images')
+def display_admin_images():
+    # Query all images from the database
+    images = Product.query.all()
+    return render_template('admin/image.html', images=images)  
+
+
+# to retrive image from database
+@app.route('/image/<int:product_id>')
+def serve_image(product_id):
+    product=Product.query.get_or_404(product_id)
+    if not product.image_data:
+        return 'No image found', 404
+    return send_file(BytesIO(product.image_data), mimetype= 'image/png')
 
 
 @app.route('/save_contact', methods=['POST'])
