@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<!--- best selling --->
+	<section class="selling">
+        <h1>Add Product</h1>
+        <form action="/admin/add_product" method="POST" enctype="multipart/form-data">
+            <label for="name">Product Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+    
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+    
+            <label for="price">Price:</label><br>
+            <input type="number" id="price" name="price" step="0.01" required><br><br>
+    
+            <label for="image">Product Image:</label><br>
+            <input type="file" id="image" name="image" accept="image/*" required><br><br>
+    
+            <input type="submit" value="Add Product">
+        </form>
+    </section>
+{% endblock content %}
