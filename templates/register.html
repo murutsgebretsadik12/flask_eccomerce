@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+<!-- register -->
+<section class="newsletter">
+    <div class="newsletter_content" data-aos="zoom-in">
+        <div class="newsletter_text">
+            <h2>Join Our Mailing List!</h2>
+            <p>Sign up with your email address to receive updates.</p>
+         </div>
+
+         <form action="/save_contact" method="post" id="newsletterForm">
+            <input type="text" name="username" placeholder="username" >
+            <span class="error" id="usernameError"></span>
+            <input type="email" name='email' placeholder="email" ><br>
+            <input type="password" name='password' placeholder="password" ><br>
+            <input type="submit" value="Submit" class="btnnn">
+            <span class="error" id="emailError"></span>
+            <span class="error" id="passwordError"></span>  
+         </form>
+       
+    </div>
+</section>
+
+{% endblock %}
+
+{% block title %}
+register page
+{% endblock %}
+
+ <!-- adding style css -->
+ {% block styles %}
+ <link rel="stylesheet" href="{{ url_for('static',filename='style/register.css') }}">
+ {% endblock %}
