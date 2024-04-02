@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<!--- best selling --->
+	<section class="selling">
+		<div class="center_text" data-aos="fade-up">
+			<h2>New Products</h2>
+		</div>
+
+		<div class="selling_content" data-aos="zoom-in-up">
+             <h1>Product</h1>
+		</div>	
+	</section>
+    
+{% endblock %}
+
+{% block title %}
+product page
+{% endblock %} 
+
+ <!-- adding style css -->
+ {% block styles %}
+ <link rel="stylesheet" href="{{ url_for('static',filename='style/product.css') }}">
+ {% endblock %}
