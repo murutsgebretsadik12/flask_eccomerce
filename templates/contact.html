@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+<section class="newsletter">
+    <div class="newsletter_content" data-aos="zoom-in">
+        <div class="newsletter_text">
+            <h2>Join Our Mailing List!</h2>
+            <p>Sign up with your email address to receive updates.</p>
+            <p>If you do not have an account, <a href="{{ url_for('register') }}">register here</a>.</p>
+         </div>
+
+         <form action="/login_contact" method="post" id="newsletterForm">
+            <input type="email" name='email' placeholder="email" ><br>
+            <input type="password" name='password' placeholder="password" ><br>
+            <input type="submit" value="Submit" class="btnnn" >
+            <span class="error" id="emailError"></span>
+            <span class="error" id="passwordError"></span>
+        </form>
+        
+    </div>
+</section>
+
+{% endblock %}
+
+{% block title %}
+contact page
+{% endblock %}
+
+ <!-- adding style css -->
+ {% block styles %}
+ <link rel="stylesheet" href="{{ url_for('static',filename='style/contact.css') }}">
+ {% endblock %}
