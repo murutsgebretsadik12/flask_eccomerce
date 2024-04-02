@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <!-- home -->
+    <section class="home">
+        <div class="home_text" data-aos="fade-up">
+            <h6>New Arrivals</h6>
+            <h1>New Arrivals <br> ready to rock</h1>
+            <p>Indulge in the latest trends and elevate your style. Our new arrivals are carefully curated to bring you the freshest looks of the season. Immerse yourself in a world of fashion where quality meets style, and every piece is a statement waiting to be made.</p>
+            <a href="" class="btn">
+                Shop now
+                <i class="ri-arrow-right-line"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- brands -->
+    <div class="brands">
+        <div class="main_brands" data-aos="zoom-in">
+            <div class="brands_c">
+                <img src="{{url_for('static', filename='images/g1.png')}}" alt="profile img" >
+            </div>
+
+            <div class="brands_c">
+                <img src="{{url_for('static', filename='images/g2.png')}}" alt="profile img" >
+            </div>
+
+            <div class="brands_c">
+                <img src="{{url_for('static', filename='images/g3.png')}}" alt="profile img" >
+            </div>
+
+            <div class="brands_c">
+                <img src="{{url_for('static', filename='images/g4.png')}}" alt="profile img" >
+            </div>
+
+            <div class="brands_c">
+                <img src="{{url_for('static', filename='images/g5.png')}}" alt="profile img" >
+            </div>
+        </div>
+    </div>
+{% endblock  %}
+
+{% block title %}
+home page
+{% endblock %}
+
+
+ <!-- adding style css -->
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static',filename='style/home.css') }}">
+{% endblock %}
+
