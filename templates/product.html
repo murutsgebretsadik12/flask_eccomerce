@@ -8,7 +8,22 @@
 		</div>
 
 		<div class="selling_content" data-aos="zoom-in-up">
-             <h1>Product</h1>
+
+			
+				{% for product in products %}
+				    <div class="product">
+						<h2>{{ product.name }}</h2>
+						<p>{{ product.description }}</p>
+						<p>Price: ${{ product.price }}</p>
+						<!-- Display the image by referencing the route -->
+						{% if product.image_data %}
+						    <img src="{{ url_for('serve_image', product_id=product.id) }}" alt="{{ product.name }}">
+					    {% endif %}
+
+				    </div>
+				{% endfor %}
+			</ul>
+
 		</div>	
 	</section>
     
