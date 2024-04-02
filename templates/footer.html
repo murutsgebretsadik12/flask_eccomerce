@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+<section class="footer" data-aos="fade-down">
+    <div class="footer-box">
+        <h3>Company</h3>
+        <a href="#">About</a>
+        <a href="#">Features</a>
+        <a href="#">Works</a>
+        <a href="#">Career</a>
+    </div>
+
+    <div class="footer-box">
+        <h3>FAQ</h3>
+        <a href="#">Account</a>
+        <a href="#">Features</a>
+        <a href="#">Works</a>
+        <a href="#">Career</a>
+    </div>
+
+    <div class="footer-box">
+        <h3>Resources</h3>
+        <a href="#">Youtube Playlist</a>
+        <a href="#">Features</a>
+        <a href="#">Works</a>
+    </div>
+
+    <div class="footer-box">
+        <h3>Social</h3>
+        <div class="social">
+            <a href="#"><i class="ri-facebook-fill"></i></a>
+            <a href="#"><i class="ri-instagram-fill"></i></a>
+            <a href="#"><i class="ri-twitter-fill"></i></a>
+        </div>
+    </div>
+
+</section>
+
+<!--- copyright --->
+<div class="copyright">
+		<div class="end-text">
+			<p>CopyRight 2024 By Muruts Gebretsadik</p>
+		</div>
+
+		<div class="end-img">
+			<img src="{{url_for('static', filename='images/p.png')}}" alt="profile img">
+		</div>
+</div>
+{% endblock %}
+
+{% block title %}
+Footer page
+{% endblock %}
+
+ <!-- adding style css -->
+ {% block styles %}
+ <link rel="stylesheet" href="{{ url_for('static',filename='style/footer.css') }}">
+ {% endblock %}
