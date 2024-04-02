@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<!--- best selling --->
+	<section class="selling">
+		<div class="center_text" data-aos="fade-up">
+			<h2>Best Seller</h2>
+		</div>
+
+		<div class="selling_content" data-aos="zoom-in-up">
+			<div class="col">
+				<div class="col_img">
+					<img src="{{url_for('static', filename='images/n1.png')}}" alt="profile img">
+				</div>
+
+				<div class="col_icon">
+					<a href="#"><i class="ri-heart-line"></i></a>
+					<a href="#"><i class="ri-eye-line"></i></a>
+					<a href="#"><i class="ri-shopping-cart-line"></i></a>
+				</div>
+			</div>
+
+			<div class="col">
+				<div class="col_img">
+					<img src="{{url_for('static', filename='images/n4.png')}}" alt="profile img">
+				</div>
+
+				<div class="col_icon">
+					<a href="#"><i class="ri-heart-line"></i></a>
+					<a href="#"><i class="ri-eye-line"></i></a>
+					<a href="#"><i class="ri-shopping-cart-line"></i></a>
+				</div>
+			</div>
+
+			<div class="col">
+				<div class="col_img">
+					<img src="{{url_for('static', filename='images/n7.png')}}" alt="profile img">
+				</div>
+
+				<div class="col_icon">
+					<a href="#"><i class="ri-heart-line"></i></a>
+					<a href="#"><i class="ri-eye-line"></i></a>
+					<a href="#"><i class="ri-shopping-cart-line"></i></a>
+				</div>
+			</div>
+
+		</div>
+	</section>
+    
+{% endblock %}
+
+{% block title %}
+popular page
+{% endblock %} 
+
+ <!-- adding style css -->
+ {% block styles %}
+ <link rel="stylesheet" href="{{ url_for('static',filename='style/popular.css') }}">
+ {% endblock %}
