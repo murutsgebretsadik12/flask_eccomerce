@@ -1,11 +1,10 @@
 from flask import Flask, render_template,redirect, url_for, request, flash
-import os
 from werkzeug.utils import secure_filename
-
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from model import  db,init_db,Product,User 
 from config import Config
+from flask_login import LoginManager, current_user,login_user, logout_user, login_required
 
 # Create a Flask app instance
 app = Flask(__name__)
@@ -16,8 +15,16 @@ init_db(app) # Initialize the database
 
 migrate = Migrate(app, db)
 
+# After initializing your app and database
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'contact'
 
 
+# Define a user loader function for Flask-Login
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 
@@ -115,6 +122,26 @@ def save_contact():
 
         # Redirect to the home page or elsewhere after saving
         return redirect(url_for('index'))
+    
+@app.route('/login_contact', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        user = User.query.filter_by(email=email).first()
+        if user and user.check_password(password):
+            login_user(user)
+            next_page = request.args.get('next')
+            return redirect(next_page or url_for('index'))
+        flash('Invalid email or password')
+    return render_template('contact.html')
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)
