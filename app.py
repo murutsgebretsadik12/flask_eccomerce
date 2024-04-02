@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from model import  db,init_db,Product 
+from model import  db,init_db,Product,User 
 from config import Config
 
 # Create a Flask app instance
@@ -38,9 +38,15 @@ def product():
 def popular():
     return render_template('popular.html')
 
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'gif'}
@@ -83,6 +89,32 @@ def admin_add_product():
             flash('Invalid file format.', 'error')
 
     return render_template('admin/add_product.html')
+
+
+@app.route('/save_contact', methods=['POST'])
+def save_contact():
+    if request.method =='POST':
+        # Retrieve from data
+        username=request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+
+        # Check if username already exists
+        existing_contact = User.query.filter_by(username=username).first()
+        if existing_contact:
+            flash('Username already exists. Please choose a different username.', 'error')
+            return redirect(url_for('register'))
+        
+        # create a new User instance
+        new_user = User(username=username, email=email, password_hash=password)
+        new_user.set_password(password)# Hash the password
+
+        # Add new user to the database
+        db.session.add(new_user)
+        db.session.commit()
+
+        # Redirect to the home page or elsewhere after saving
+        return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)
