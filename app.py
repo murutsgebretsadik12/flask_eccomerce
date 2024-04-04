@@ -62,6 +62,8 @@ def contact():
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'gif'}
 
+# add product to database
+
 @app.route('/admin/add_product', methods=['GET', 'POST'])
 def admin_add_product():
     if request.method == 'POST':
@@ -101,7 +103,35 @@ def admin_add_product():
 
     return render_template('admin/add_product.html')
 
+# update product
+@app.route('/admin/update_product/<int:product_id>', methods=['GET', 'POST'])
+@login_required
+def update_product(product_id):
+    product = Product.query.get_or_404(product_id)
+    if request.method == 'POST':
+        product.name = request.form.get('name')
+        product.description = request.form.get('description')
+        product.price = request.form.get('price')
+        # Handle image update if necessary
+        db.session.commit()
+        flash('Product updated successfully!', 'success')
+        return redirect(url_for('display_admin_images'))
+    return render_template('admin/update_product.html', product=product)
 
+
+# delet product
+@app.route('/admin/delete_product/<int:product_id>', methods=['POST'])
+@login_required
+def delete_product(product_id):
+    product = Product.query.get_or_404(product_id)
+    db.session.delete(product)
+    db.session.commit()
+    flash('Product deleted successfully!', 'success')
+    return redirect(url_for('display_admin_images'))
+
+
+
+# to display images in admin page
 @app.route('/admin/images')
 def display_admin_images():
     # Query all images from the database
@@ -142,7 +172,7 @@ def save_contact():
 
         # Redirect to the home page or elsewhere after saving
         return redirect(url_for('index'))
-    
+     
 @app.route('/login_contact', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
