@@ -117,17 +117,13 @@ def update_product(product_id):
         return redirect(url_for('display_admin_images'))
     return render_template('admin/update_product.html', product=product)
 
-# delet product
-@app.route('/admin/delete_product/<int:product_id>', methods=['POST'])
+# delete products
+@app.route('/admin/delete_product/<int:product_id>')
 @login_required
-def delete_product(product_id):
-    if request.method == 'POST':
-        product = Product.query.get_or_404(product_id)
-        db.session.delete(product)
-        db.session.commit()
-        flash('Product deleted successfully!', 'success')
-        return redirect(url_for('display_admin_images'))
-    return redirect(url_for('index'))  # Redirect to a default page if method not allowed
+def delete_product_page(product_id):
+    product = Product.query.get_or_404(product_id)
+    return render_template('admin/delete_product.html', product=product)
+
 
 
 
